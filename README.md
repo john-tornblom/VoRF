@@ -46,11 +46,11 @@ john@localhost:VoRF$ ./support/collision_detection.sh
 ```
 
 ## Reporting Bugs
-If you encounter problems with VoRF, please [file a github issue]
-(https://github.com/john-tornblom/vorf/issues/new). If you plan on sending pull
-requests which affect more than a few lines of code, please file an issue before
-you start to work on you changes. This will allow us to discuss the solution
-properly before you commit time and effort.
+If you encounter problems with VoRF, please 
+[file a github issue](https://github.com/john-tornblom/vorf/issues/new). 
+If you plan on sending pull requests which affect more than a few lines of code, 
+please file an issue before you start to work on you changes. This will allow us
+to discuss the solution properly before you commit time and effort.
 
 ## Citation
 If you use VoRF in a scientific publication, we would appreciate citations.
