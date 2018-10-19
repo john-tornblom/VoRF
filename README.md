@@ -8,7 +8,8 @@ same output. These equivalence classes are then processed by a VoRF Property
 Checker that checks that all input/output mappings captured by an equivalence
 class complies with some requirement.
 
-For more information, see [our paper]().
+For more information, see
+[our paper](https://www.ida.liu.se/labs/rtslab/publications/2018/John_FTSCS.pdf).
 
 ## Building
 Autotools is used to generate makefiles, and VoRF Core depends on libjson-c to
@@ -55,7 +56,13 @@ to discuss the solution properly before you commit time and effort.
 ## Citation
 If you use VoRF in a scientific publication, we would appreciate citations.
 ```
-N/A, currently in submission.
+@inproceedings{Tornblom18,
+  title = {Formal Verification of Random Forests in Safety-Critical Applications},
+  author = {John Törnblom and Simin Nadjm-Tehrani},
+  booktitle = {International Workshop on Formal Techniques for Safety-Critical Systems (FTSCS)},
+  year = {2018},
+  publisher = {Springer}
+}
 ```
 
 ## License
