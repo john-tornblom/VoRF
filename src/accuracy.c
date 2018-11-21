@@ -25,10 +25,10 @@ along with this program; see the file COPYING. If not, see
  * Print the accuracy of a model for a set of samples to stdout.
  **/
 int main(int argc, char** argv) {
-  float *data;
+  real_t *data;
   size_t nb_rows, nb_cols;
   vorf_forest_t* f;
-  float score = 0;
+  real_t score = 0;
   
   if(argc < 3) {
     printf("usage: %s <model file> <csv file>\n", argv[0]);
@@ -58,8 +58,8 @@ int main(int argc, char** argv) {
   printf("accuracy:nb_samples: %ld\n", nb_rows);
   
   for(size_t row=0; row<nb_rows; row++) {
-    float *sample = &data[row * nb_cols];
-    float prob[f->nb_outputs];
+    real_t *sample = &data[row * nb_cols];
+    real_t prob[f->nb_outputs];
     
     memset(prob, 0, sizeof(prob));
     vorf_forest_eval(f, &data[row * nb_cols], prob);

@@ -30,8 +30,8 @@ along with this program; see the file COPYING. If not, see
 
 
 typedef union image {
-  float vector[IMG_HEIGHT*IMG_WIDTH];
-  float matrix[IMG_HEIGHT][IMG_WIDTH];
+  real_t vector[IMG_HEIGHT*IMG_WIDTH];
+  real_t matrix[IMG_HEIGHT][IMG_WIDTH];
 } image_t;
 
 
@@ -138,9 +138,9 @@ is_correct(void *ctx, vorf_mapping_t *m) {
  * Parse command line arguments and launch program.
  **/
 int main(int argc, char** argv) {
-  float *data;
+  real_t *data;
   size_t nb_rows, nb_cols;
-  float score = 0;
+  real_t score = 0;
   vorf_forest_t* f;
   size_t threshold;
   size_t window;
@@ -179,7 +179,7 @@ int main(int argc, char** argv) {
   
   time_t t = time(NULL);
   for(size_t row=0; row<nb_rows; row++) {
-    float *sample = &data[row * nb_cols];
+    real_t *sample = &data[row * nb_cols];
     image_t* img = (image_t*)sample;
     int label = (int)sample[f->nb_inputs];
     bool res = true;

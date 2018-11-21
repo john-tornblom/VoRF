@@ -23,15 +23,18 @@ see <http://www.gnu.org/licenses/>.  */
 #include <stddef.h>
 #include <stdbool.h>
 
+
 #define VORF_UNUSED(x) (void)(x)
+#define USE_DOUBLE 0
+typedef float real_t;
 
 
 /**
  * The bound of a variable, i.e. its range.
  **/
 typedef struct vorf_bound {
-  float lower;
-  float upper;
+  real_t lower;
+  real_t upper;
 } vorf_bound_t;
 
 
@@ -79,9 +82,9 @@ const char* vorf_version(void);
 
 
 /**
- * Compute the argmax of a vector with floats.
+ * Compute the argmax of a vector with reals.
  **/
-size_t vorf_argmax(const float* fvec, size_t length);
+size_t vorf_argmax(const real_t* fvec, size_t length);
 
 
 /**
@@ -90,7 +93,7 @@ size_t vorf_argmax(const float* fvec, size_t length);
  * A correctly formatted CSV file (using the comma delimiter) without
  * a header is assumed.
  **/
-bool vorf_load_csv(const char* filename, float **data,
+bool vorf_load_csv(const char* filename, real_t **data,
 		   size_t *nb_rows, size_t *nb_cols);
 
 
@@ -142,7 +145,7 @@ void vorf_forest_del(vorf_forest_t* f);
 /**
  * Execute the forest on concrete values.
  **/
-void vorf_forest_eval(const vorf_forest_t* f, const float *inputs, float *outputs);
+void vorf_forest_eval(const vorf_forest_t* f, const real_t *inputs, real_t *outputs);
 
 
 /**

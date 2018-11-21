@@ -17,13 +17,12 @@ License along with VoRF; see the files COPYING and COPYING.LESSER. If not,
 see <http://www.gnu.org/licenses/>.  */
 
 
-#include <math.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 
 #include "vorf.h"
-
+#include "vorf_math.h"
 
 vorf_mapping_t*
 vorf_mapping_new(size_t input_dim, size_t output_dim) {
@@ -107,13 +106,13 @@ vorf_mapping_argmax(const vorf_mapping_t* m) {
 void
 vorf_mapping_join(const vorf_mapping_t *m, vorf_mapping_t *join) {
   for(size_t i=0; i<m->nb_inputs; i++) {
-    join->inputs[i].lower = fminf(join->inputs[i].lower, m->inputs[i].lower);
-    join->inputs[i].upper = fmaxf(join->inputs[i].upper, m->inputs[i].upper);
+    join->inputs[i].lower = vorf_min(join->inputs[i].lower, m->inputs[i].lower);
+    join->inputs[i].upper = vorf_max(join->inputs[i].upper, m->inputs[i].upper);
   }
 
   for(size_t i=0; i<m->nb_outputs; i++) {
-    join->outputs[i].lower = fminf(join->outputs[i].lower, m->outputs[i].lower);
-    join->outputs[i].upper = fmaxf(join->outputs[i].upper, m->outputs[i].upper);
+    join->outputs[i].lower = vorf_min(join->outputs[i].lower, m->outputs[i].lower);
+    join->outputs[i].upper = vorf_max(join->outputs[i].upper, m->outputs[i].upper);
   }
 }
 

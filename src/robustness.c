@@ -27,7 +27,7 @@ along with this program; see the file COPYING. If not, see
 
 static bool
 is_correct(void *ctx, vorf_mapping_t *m) {
-  float *sample = ctx;
+  real_t *sample = ctx;
   int pred = vorf_mapping_argmax(m);
   int label = (int)roundf(sample[m->nb_inputs]);
   return pred == label;
@@ -38,11 +38,11 @@ is_correct(void *ctx, vorf_mapping_t *m) {
  * Parse command line arguments and launch program.
  **/
 int main(int argc, char** argv) {
-  float *data;
+  real_t *data;
   size_t nb_rows, nb_cols;
-  float score = 0;
+  real_t score = 0;
   vorf_forest_t* f;
-  float threshold;
+  real_t threshold;
   
   if(argc < 4) {
     printf("usage: %s <model file> <csv file> <threshold>\n", argv[0]);
@@ -76,7 +76,7 @@ int main(int argc, char** argv) {
 
   time_t t = time(NULL);
   for(size_t row=0; row<nb_rows; row++) {
-    float *sample = &data[row * nb_cols];
+    real_t *sample = &data[row * nb_cols];
     vorf_bound_t bounds[f->nb_inputs];
 
     for(size_t i=0; i<f->nb_inputs; i++) {

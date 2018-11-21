@@ -58,8 +58,8 @@ class Forest(object):
         return self.ptr.nb_outputs
 
     def eval(self, *args):
-        inputs = ffi.new('float[%d]' % self.nb_inputs, args)
-        outputs = ffi.new('float[%d]' % self.nb_outputs)
+        inputs = ffi.new('real_t[%d]' % self.nb_inputs, args)
+        outputs = ffi.new('real_t[%d]' % self.nb_outputs)
 
         lib.vorf_forest_eval(self.ptr, inputs, outputs)
         return list(outputs)

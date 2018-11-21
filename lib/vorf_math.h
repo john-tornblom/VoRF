@@ -17,43 +17,23 @@ License along with VoRF; see the files COPYING and COPYING.LESSER. If not,
 see <http://www.gnu.org/licenses/>.  */
 
 
-#ifndef VORF_TREE_H
-#define VORF_TREE_H
+#ifndef VORF_MATH_H
+#define VORF_MATH_H
 
-#include <stddef.h>
+#include <math.h>
 
-
-/**
- * A Decision tree contains nodes with thresholds on input variables which 
- * determine the path traveled in the tree. Leaves carry values.
- **/
-struct vorf_tree {
-  int* left;
-  int* right;
-  
-  int*     feature;
-  real_t*  threshold;
-  real_t** value;
-
-  size_t nb_inputs;
-  size_t nb_outputs;
-  size_t nb_nodes;
-};
+#include "vorf.h"
 
 
-struct json_object;
+#if USE_DOUBLE
+#define vorf_nextafter(x, y) nextafter(x, y)
+#define vorf_max(x, y)       fmax(x, y)
+#define vorf_min(x, y)       fmin(x, y)
+#else
+#define vorf_nextafter(x, y) nextafterf(x, y)
+#define vorf_max(x, y)       fmaxf(x, y)
+#define vorf_min(x, y)       fminf(x, y)
+#endif
 
 
-/**
- * Parse a JSON dictonary into a tree.
- **/
-vorf_tree_t *vorf_tree_parse(struct json_object *root);
-
-
-/**
- * Delete a tree and all of its members.
- **/
-void vorf_tree_del(vorf_tree_t* t);
-
-
-#endif //VORF_TREE_H
+#endif //VORF_MATH_H

@@ -157,7 +157,7 @@ vorf_forest_forall(const vorf_forest_t *f, const vorf_bound_t* input_region,
  **/
 static bool
 pipe_eval_compute(void *ctx, vorf_mapping_t* m) {
-  float *outputs = ctx;
+  real_t *outputs = ctx;
 
   for(size_t i=0; i<m->nb_outputs; i++) {
     assert(m->outputs[i].lower == m->outputs[i].upper);
@@ -169,7 +169,7 @@ pipe_eval_compute(void *ctx, vorf_mapping_t* m) {
 
 
 void
-vorf_forest_eval(const vorf_forest_t* f, const float *inputs, float *outputs) {
+vorf_forest_eval(const vorf_forest_t* f, const real_t *inputs, real_t *outputs) {
   vorf_bound_t bounds[f->nb_inputs];
 
   for(size_t i=0; i<f->nb_inputs; i++) {

@@ -17,7 +17,8 @@
 lib_LTLIBRARIES = libvorf.la
 
 libvorf_la_CFLAGS = -I../inc -std=c99 -D_DEFAULT_SOURCE -Wextra -Werror \
-                    -pedantic -Wdouble-promotion @LIBJSON_CFLAGS@
+                    -pedantic -Wdouble-promotion -Wfloat-conversion \
+                    @LIBJSON_CFLAGS@
 libvorf_la_SOURCES = vorf_forest.c \
                      vorf_mapping.c \
                      vorf_refinary.c \

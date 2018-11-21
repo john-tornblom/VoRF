@@ -26,7 +26,7 @@ see <http://www.gnu.org/licenses/>.  */
 
 
 size_t
-vorf_argmax(const float* fvec, size_t length) {
+vorf_argmax(const real_t* fvec, size_t length) {
   size_t m = 0;
 
   for(size_t i=1; i<length; i++) {
@@ -40,7 +40,7 @@ vorf_argmax(const float* fvec, size_t length) {
 
 
 bool
-vorf_load_csv(const char* filename, float **data, size_t *rows, size_t *cols) {
+vorf_load_csv(const char* filename, real_t **data, size_t *rows, size_t *cols) {
   char* line = NULL;
   size_t linelen;
   size_t nb_rows = 0;
@@ -64,14 +64,14 @@ vorf_load_csv(const char* filename, float **data, size_t *rows, size_t *cols) {
   }
   rewind(fp);
 
-  *data = calloc(nb_rows * nb_cols, sizeof(float));
+  *data = calloc(nb_rows * nb_cols, sizeof(real_t));
   assert(*data);
   
   while(getline(&line, &linelen, fp) > 0) {
     char* p = line;
     do {
       assert(count <= nb_rows * nb_cols);
-      (*data)[count++] = atof(p);
+      (*data)[count++] = (real_t)atof(p);
       if((p = strstr(p, ","))) {
 	p++;
       }

@@ -16,15 +16,14 @@ You should have received a copy of the GNU Lesser General Public
 License along with VoRF; see the files COPYING and COPYING.LESSER. If not,
 see <http://www.gnu.org/licenses/>.  */
 
-
 #include <stdlib.h>
-#include <math.h>
 #include <assert.h>
 #include <string.h>
 
 #include "vorf.h"
 #include "vorf_refinary.h"
 #include "vorf_tree.h"
+#include "vorf_math.h"
 
 
 vorf_refinery_t*
@@ -60,7 +59,7 @@ vorf_refinery_emit(vorf_refinery_t* r, vorf_mapping_t *m, size_t node_id) {
     return r->emit_cb(r->emit_ctx, m);
   }
 
-  float threshold = r->tree->threshold[node_id];
+  real_t threshold = r->tree->threshold[node_id];
   int dim = r->tree->feature[node_id];
 
   //        left       right
@@ -93,7 +92,7 @@ vorf_refinery_emit(vorf_refinery_t* r, vorf_mapping_t *m, size_t node_id) {
   // right: (threshold, upper]
   if(m->inputs[dim].upper > threshold) {
     if(m->inputs[dim].lower < threshold) {
-      m->inputs[dim].lower = nextafterf(threshold, INFINITY);
+      m->inputs[dim].lower = vorf_nextafter(threshold, INFINITY);
     }
     if(!vorf_refinery_emit(r, m, right_id)) {
       return false;

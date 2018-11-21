@@ -19,7 +19,6 @@ see <http://www.gnu.org/licenses/>.  */
 
 #include <assert.h>
 #include <stdlib.h>
-#include <math.h>
 #include <json.h>
 
 #include "vorf.h"
@@ -30,16 +29,16 @@ see <http://www.gnu.org/licenses/>.  */
  * Parse a JSON float array.
  **/
 static void
-vorf_parse_floats(json_object *obj, float** mem, size_t* length) {
+vorf_parse_floats(json_object *obj, real_t** mem, size_t* length) {
   array_list* array = json_object_get_array(obj);
   size_t _length = array_list_length(array);
-  float* _mem = calloc(_length, sizeof(float));
+  real_t* _mem = calloc(_length, sizeof(real_t));
   
   assert(_mem);
   
   for(size_t i=0; i<_length; i++) {
     json_object *el = array_list_get_idx(array, i);
-    _mem[i] = json_object_get_double(el);
+    _mem[i] = (real_t)json_object_get_double(el);
   }
 
   *length = _length;
@@ -106,7 +105,7 @@ vorf_tree_parse(json_object *root) {
   size_t v_length = array_list_length(v_array);
   assert(v_length == tree->nb_nodes);
   
-  tree->value = calloc(v_length, sizeof(float*));
+  tree->value = calloc(v_length, sizeof(real_t*));
   assert(tree->value);
   
   for(size_t i=0; i<v_length; i++) {
