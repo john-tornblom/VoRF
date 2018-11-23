@@ -1,0 +1,6 @@
+dist: xenial
+language: c
+install:
+  - sudo apt-get install build-essential libjson-c-dev
+script:
+  - "./bootstrap.sh && ./configure && make"
