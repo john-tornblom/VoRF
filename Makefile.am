@@ -15,3 +15,6 @@
 # <http://www.gnu.org/licenses/>.
 
 SUBDIRS = lib inc src examples
+EXTRA_DIST = bindings/python/vorf.py \
+             bindings/python/build.py \
+             bindings/python/test.py
