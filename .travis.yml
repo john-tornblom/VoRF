@@ -1,6 +1,23 @@
 dist: xenial
 language: c
+env:
+  global:
+   - secure: "vScm/TS8r2GyDBdmEdb4Iaxj0TtzxVuqHi9SyRv8j6KgLsG14BCs2nYyHoQ7aAc5xfZo+aAZ/bX294msv7iRrq2TEVZXzI12dueYZK42VjRUtNhvxN7tmu61E2GzGEC6i4eFmrrxdTqZG7vyLj1czSXs4Ai70ZnJP5j2BOBH0Zam5IK2w3ts0PE2ZtH2er5bbs4tSRuzuqJ1oQaKzcKJGRws4AFyfTZuMt49FQcjvDdrWF4UXFo3J6vlj8qowiFfLmiLrH3FvZZ1xBV/Q+WozUsalFivGooOebNlRtWYZmn9ycltfsPTLa9D6IT1LoVzPR+BCiMroKbSYvO6lp7CV8P2y2CallY1/VgVqOpXwcibCplwG+X2fo1xMgEowEBG1ZJ07IUgMI5Bzx0b2rDzxo4MpVW70I1eI1v0qLNm0yMdcCNbwgpJSdrkL3dzgkeuSAplWRdc7Pma6GFduGZNM8XkrvzRikM4OxUwt2FtihOk+SNVqmrI6v4VKkAzumqpSAzv2yRRmBEFIiRM6LWomLnoh2374xEpZNMAAWdKpbDHKj5t26viePfbD6FSi4k7Zocn0qNqDZ2AVnJIgoteNBKXJW27x6WhFs6aFHu5HGFr/xJuFDTWOiIP37btunUvz1rbNEloi96MSjEuft2z7V/zY3N3A+wxthDbIOxjoW0="
+
+before_install:
+  - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
 install:
   - sudo apt-get install build-essential libjson-c-dev
+
 script:
-  - "./bootstrap.sh && ./configure && make"
+  - "./bootstrap.sh && ./configure && make clean && make"
+
+addons:
+  coverity_scan:
+    project:
+      name: "john-tornblom/VoRF"
+      description: "Build submitted via Travis CI"
+    notification_email: john.tornblom@gmail.com
+    build_command_prepend: "./bootstrap.sh; ./configure; make clean"
+    build_command: "make"
+    branch_pattern: master
